@@ -92,8 +92,8 @@ def new_betting_turn(players, player_hands, community, pot, current_turn, round_
         elif current_turn == 1:
             #print("Eval")
             #one_action = random_turn(cur_bet)
-            #one_action = eval_turn(cur_bet, pot, player_hands[1] + community, round_num)
-            one_action = userPlayer(player_hands[1], community, pot, cur_bet)
+            one_action = eval_turn(cur_bet, pot, player_hands[1] + community, round_num)
+            #one_action = userPlayer(player_hands[1], community, pot, cur_bet)
             if one_prev == "Low Raise" and (one_action == "Call" or one_action == "High Raise"):
                 players[1] -= 15
                 pot += 15
