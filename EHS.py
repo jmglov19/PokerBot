@@ -14,7 +14,7 @@ def time_convert(sec):
 
 def create_deck():
     numbers = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-    suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
+    suits = ['hearts', 'diamonds', 'clubs', 'spades']
 
     deck = []
     for i in suits:
