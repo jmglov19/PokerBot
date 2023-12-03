@@ -50,7 +50,7 @@ def score_hand(full_hand):
         # High Card
         else:
             scores.append((0, 0, 0, 0, sorted_hand[4][0]))
-
+    
     return max(scores)
 
 
@@ -135,5 +135,5 @@ def check_kinds(hand):
     # Return the amount of like cards and the high card
     return kind4, high_kind4, kind3, high_kind3, kind2, high_kind2
 
-# print(score_hand(
-# [(2, 'Hearts'), (2, 'Diamonds'), (4, 'Hearts'), (4, 'Hearts'), (6, 'Spades'), (6, 'Clubs'), (10, 'Hearts')]))
+print(score_hand(
+    [(2, 'Hearts'), (2, 'Diamonds'), (4, 'Hearts'), (4, 'Hearts'), (6, 'Spades'), (6, 'Clubs'), (10, 'Hearts')]))
