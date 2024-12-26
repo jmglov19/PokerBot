@@ -12,6 +12,9 @@ def score_hand(full_hand):
     for hand in hands:
         sorted_hand = list(hand)
         sorted_hand.sort()
+        added_total = 0
+        for i in sorted_hand:
+           added_total += i[0] 
 
         # Check if there is a straight
         straight = check_straight(sorted_hand)
@@ -22,34 +25,34 @@ def score_hand(full_hand):
 
         # Royal Flush
         if straight and flush and sorted_hand[4][0] == 14:
-            scores.append((9, 0, 0, 0, 14))
+            scores.append((9, 0, 0, 0, 0, 14, added_total))
         # Straight Flush
         elif straight and flush:
-            scores.append((8, 0, 0, 0, sorted_hand[4][0]))
+            scores.append((8, 0, 0, 0, 0, sorted_hand[4][0], added_total))
         # Four of a Kind
         elif kinds[0] >= 1:
-            scores.append((7, kinds[1], 0, 0, sorted_hand[4][0]))
+            scores.append((7, kinds[1], 0, 0, 0, sorted_hand[4][0], added_total))
         # Full House
         elif kinds[2] == 1 and kinds[4] == 1:
-            scores.append((6, 0, kinds[3], kinds[5], sorted_hand[4][0]))
+            scores.append((6, 0, kinds[3], kinds[5], 0, sorted_hand[4][0], added_total))
         # Flush
         elif flush:
-            scores.append((5, 0, 0, 0, sorted_hand[4][0]))
+            scores.append((5, 0, 0, 0, 0, sorted_hand[4][0], added_total))
         # Straight
         elif straight:
-            scores.append((4, 0, 0, 0, sorted_hand[4][0]))
+            scores.append((4, 0, 0, 0, 0, sorted_hand[4][0], added_total))
             # Three of a Kind
         elif kinds[2] == 1:
-            scores.append((3, 0, kinds[3], 0, sorted_hand[4][0]))
+            scores.append((3, 0, kinds[3], 0, 0, sorted_hand[4][0], added_total))
         # Two Pairs
         elif kinds[4] == 2:
-            scores.append((2, 0, 0, kinds[5], sorted_hand[4][0]))
+            scores.append((2, 0, 0, kinds[5], sorted_hand[1][0], sorted_hand[4][0], added_total))
         # One Pair
         elif kinds[4] == 1:
-            scores.append((1, 0, 0, kinds[5], sorted_hand[4][0]))
+            scores.append((1, 0, 0, kinds[5], 0, sorted_hand[4][0], added_total))
         # High Card
         else:
-            scores.append((0, 0, 0, 0, sorted_hand[4][0]))
+            scores.append((0, 0, 0, 0, 0, sorted_hand[4][0], added_total))
     
     return max(scores)
 
@@ -135,5 +138,28 @@ def check_kinds(hand):
     # Return the amount of like cards and the high card
     return kind4, high_kind4, kind3, high_kind3, kind2, high_kind2
 
-print(score_hand(
-    [(2, 'Hearts'), (2, 'Diamonds'), (4, 'Hearts'), (4, 'Hearts'), (6, 'Spades'), (6, 'Clubs'), (10, 'Hearts')]))
+#print(score_hand(
+   # [(2, 'Hearts'), (3, 'Diamonds'), (3, 'Hearts'), (4, 'Hearts'), (10, 'Spades'), (10, 'Clubs'), (10, 'Hearts')]))
+h1 = [(5, 'Hearts'), (10, 'Diamonds')]
+h2 = [(9, 'Hearts'), (10, 'Spades')]
+
+com =[(3, 'Hearts'), (4, 'Spades'), (7, 'Spades'), (7, 'Clubs'), (10, 'Hearts')]
+
+
+def test_scores(hand1, hand2, community):
+    
+    player_scores = []
+    player_scores.append(score_hand(hand1 + community))
+    player_scores.append(score_hand(hand2 + community))
+    print(player_scores)
+    if player_scores[0] == player_scores[1]:
+        print("Tie")
+    # Returns for a player who won the game
+    elif player_scores[0] > player_scores[1]:
+        print(1)
+    elif player_scores[1] > player_scores[0]:
+        print(2)
+
+    
+
+#test_scores(h1, h2, com)

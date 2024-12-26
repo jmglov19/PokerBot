@@ -15,6 +15,8 @@ def EHS_decision(pot_size, cur_bet, our_cards, board_cards, stage):
 
     # Pre_Flop
     if stage == 0:
+        
+
         # Look at the array and see how powerful our 2 cards are
         # It would take way to long to run an ehs on this
         hand_value = pre_flop(our_cards)

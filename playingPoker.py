@@ -115,28 +115,29 @@ def new_betting_turn(players, player_hands, community, pot, current_turn, round_
         # Depending on whose turn it is pick an action
         if current_turn == 0:
             print("EHS")
-            opponents_action_label["text"] = "Thinking"
-            # Depending on the action we put take money from the player and put it into the pot
-            zero_action = EHS_decision(pot, cur_bet, player_hands[0], community, round_num)
-            #zero_action = random_turn(cur_bet)
-            opponents_action_label["text"] = zero_action
+            if zero_prev != "High Raise":
+                opponents_action_label["text"] = "Thinking"
+                # Depending on the action we put take money from the player and put it into the pot
+                zero_action = EHS_decision(pot, cur_bet, player_hands[0], community, round_num)
+                #zero_action = random_turn(cur_bet)
+                opponents_action_label["text"] = zero_action
 
-            # If a player low raises and then is up raised they only have to put another 15 in.
-            if zero_prev == "Low Raise" and (zero_action == "Call" or zero_action == "High Raise"):
-                players[0] -= 15
-                pot += 15
-            elif zero_action == "High Raise":
-                players[0] -= 30
-                pot += 30
-                cur_bet = 30
-            elif zero_action == "Low Raise":
-                players[0] -= 15
-                pot += 15
-                cur_bet = 15
-            elif zero_action == "Call":
-                players[0] -= cur_bet
-                pot += cur_bet
-            zero_prev = zero_action
+                # If a player low raises and then is up raised they only have to put another 15 in.
+                if zero_prev == "Low Raise" and (zero_action == "Call" or zero_action == "High Raise"):
+                    players[0] -= 15
+                    pot += 15
+                elif zero_action == "High Raise":
+                    players[0] -= 30
+                    pot += 30
+                    cur_bet = 30
+                elif zero_action == "Low Raise":
+                    players[0] -= 15
+                    pot += 15
+                    cur_bet = 15
+                elif zero_action == "Call":
+                    players[0] -= cur_bet
+                    pot += cur_bet
+                zero_prev = zero_action
             current_turn = 1
             #print(zero_action)
         elif current_turn == 1:
@@ -156,17 +157,19 @@ def new_betting_turn(players, player_hands, community, pot, current_turn, round_
             if one_prev == "Low Raise" and (one_action == "Call" or one_action == "High Raise"):
                 players[1] -= 15
                 pot += 15
+                
             elif one_action == "High Raise":
                 players[1] -= 30
                 pot += 30
                 cur_bet = 30
-            elif one_action == "Low Raise":
+            elif one_action == "Low Raise" and zero_prev != "High Raise":
                 players[1] -= 15
                 pot += 15
                 cur_bet = 15
             elif one_action == "Call":
                 players[1] -= cur_bet
                 pot += cur_bet
+                pass
             one_prev = one_action
             #print(one_action)
             current_turn = 0
@@ -190,12 +193,16 @@ def new_betting_turn(players, player_hands, community, pot, current_turn, round_
 
         
         if one_action == "High Raise" and zero_action == "High Raise":
+            #pot = 60
             break
         if one_action == "Low Raise" and zero_action == "Low Raise":
+            #pot = 30
             break
         if one_action == "Call" or zero_action == "Call":
+            #pot = cur_bet * 2
             break
         if one_action == "Check" and zero_action == "Check":
+            #pot = 0
             break
 
     # Calculate the new pot
