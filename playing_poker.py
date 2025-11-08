@@ -1,14 +1,11 @@
 from cards import *
-from ScoreChecker import score_hand
+from score_checker import score_hand
 import random
-from Evaluation import eval_turn
-# from AddjustedChatGTP import chat_gtp_turn
-from EHSPlayer import EHS_decision
+from ehs_player import EHS_decision
 
 # Imports for tkinter
 from tkinter import *
 import tkinter
-from tkinter import ttk
 from PIL import Image, ImageTk
 import threading
 from threading import Thread

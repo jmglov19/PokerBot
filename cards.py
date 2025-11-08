@@ -1,7 +1,7 @@
 # This file will be used for making the cards and hands
 
 from random import shuffle
-from ScoreChecker import score_hand
+#from ScoreChecker import score_hand
 
 
 # Create New Deck

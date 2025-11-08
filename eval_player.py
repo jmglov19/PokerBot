@@ -4,8 +4,7 @@
 # not confident about their hand.
 import cards
 import itertools
-from AddjustedChatGTP import translate_card
-from ScoreChecker import score_hand
+from score_checker import score_hand
 
 
 def eval_turn(cur_bet, cur_pot, state, stage):
@@ -135,6 +134,28 @@ def translate_hand(state):
         string_cards += card
         string_cards += " "
     # print(string_cards.split())
+
+card_values = {"2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "T": 10, "J": 11, "Q": 12, "K": 13,
+               "A": 14}
+card_ranks = list(card_values.keys())
+
+
+def translate_card(card):
+    value = str(card[0])
+    if value == "10":
+        value = "T"
+    if value == "11":
+        value = "J"
+    if value == "12":
+        value = "Q"
+    if value == "13":
+        value = "K"
+    if value == "14":
+        value = "A"
+
+    rank = card[1]
+    rank = rank[0]
+    return value + rank
 
 
 """ Test code for the evaluation

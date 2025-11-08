@@ -1,4 +1,4 @@
-from EHS import EHS_score, HandStrength
+from ehs import EHS_score, HandStrength
 
 optimalValueCoeff = 2
 

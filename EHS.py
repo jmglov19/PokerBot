@@ -1,6 +1,6 @@
 # Implementation of the ehs algorithm
 import time
-from ScoreChecker import score_hand
+from score_checker import score_hand
 import itertools
 
 
